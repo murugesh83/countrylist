@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var errorText: TextView
     private lateinit var statusBarOverlay: View
+    private lateinit var titleText: TextView
     private val adapter = CountriesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +43,14 @@ class MainActivity : ComponentActivity() {
         progressBar = findViewById(R.id.progressBar)
         errorText = findViewById(R.id.errorText)
         statusBarOverlay = findViewById(R.id.statusBarOverlay)
+        titleText = findViewById(R.id.titleText)
 
         recyclerView.adapter = adapter
 
         // Apply system bar insets as padding so content sits within safe area
         ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { v, insets ->
             val sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updatePadding(top = sysBars.top, bottom = sysBars.bottom)
+            v.updatePadding(bottom = sysBars.bottom)
             statusBarOverlay.layoutParams.height = sysBars.top
             statusBarOverlay.requestLayout()
             insets

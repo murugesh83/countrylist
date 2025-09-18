@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CountriesList</string>
+    <string name="title_countries">Counties List</string>
 </resources>
