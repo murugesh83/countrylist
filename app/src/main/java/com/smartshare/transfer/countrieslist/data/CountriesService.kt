@@ -1,3 +1,10 @@
+/*
+ CountriesService: Fetches and parses the countries JSON feed using OkHttp.
+ - Performs network I/O on Dispatchers.IO with timeouts.
+ - Parses with org.json into Country list while preserving source order.
+ - Wraps results in kotlin.Result and propagates failures.
+ @Murugesan Sagadevan
+*/
 package com.smartshare.transfer.countrieslist.data
 
 import kotlinx.coroutines.CancellationException

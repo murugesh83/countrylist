@@ -1,3 +1,10 @@
+/*
+ CountriesViewModel: Holds UI state and orchestrates data loading.
+ - Exposes CountriesUiState via StateFlow for lifecycle-aware observation.
+ - Loads countries from CountriesService with coroutines and handles errors.
+ - Caches results to survive configuration changes; supports retry.
+ @Murugesan Sagadevan
+*/
 package com.smartshare.transfer.countrieslist
 
 import androidx.lifecycle.ViewModel

@@ -1,3 +1,9 @@
+/*
+ CountriesAdapter: RecyclerView ListAdapter for displaying countries.
+ - Uses DiffUtil for efficient updates.
+ - Binds name+region, code, and capital per design spec.
+ @Murugesan Sagadevan
+*/
 package com.smartshare.transfer.countrieslist.ui
 
 import android.view.LayoutInflater
