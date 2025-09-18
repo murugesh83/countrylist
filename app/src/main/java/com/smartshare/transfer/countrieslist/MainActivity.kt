@@ -2,6 +2,11 @@ package com.smartshare.transfer.countrieslist
 
 import android.os.Bundle
 import android.view.View
+import android.graphics.Color
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -19,17 +24,35 @@ class MainActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var errorText: TextView
+    private lateinit var statusBarOverlay: View
     private val adapter = CountriesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        // Make system bars dark with light icons
+        window.statusBarColor = Color.BLACK
+        window.navigationBarColor = Color.BLACK
+        val ic = WindowCompat.getInsetsController(window, window.decorView)
+        ic.isAppearanceLightStatusBars = false
+        ic.isAppearanceLightNavigationBars = false
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBar)
         errorText = findViewById(R.id.errorText)
+        statusBarOverlay = findViewById(R.id.statusBarOverlay)
 
         recyclerView.adapter = adapter
+
+        // Apply system bar insets as padding so content sits within safe area
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { v, insets ->
+            val sysBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = sysBars.top, bottom = sysBars.bottom)
+            statusBarOverlay.layoutParams.height = sysBars.top
+            statusBarOverlay.requestLayout()
+            insets
+        }
 
         viewModel = ViewModelProvider(this)[CountriesViewModel::class.java]
 
